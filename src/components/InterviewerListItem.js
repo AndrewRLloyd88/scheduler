@@ -15,13 +15,13 @@ export default function InterviewerListItem(props) {
   //insert useState h, {useState}ere
 
   return (
-      <li className={interviewerClass} onClick={() => props.setInterviewer}>
-        <img
-          className="interviewers__item-image"
-          src={props.avatar}
-          alt={props.name}
-        />
-        {props.selected && props.name}
-      </li>
+    <li className={interviewerClass} onClick={props.setInterviewer}>
+      <img
+        className="interviewers__item-image"
+        src={props.avatar}
+        alt={props.name}
+      />
+      {props.selected && props.name}
+    </li>
   );
 }
