@@ -136,7 +136,7 @@ storiesOf("InterviewerList", module)
     />
   ));
 
-//stories for appointment
+//stories for Appointment
 storiesOf("Appointment", module)
   .addParameters({
     backgrounds: [{ name: "white", value: "#fff", default: true }],
