@@ -23,6 +23,8 @@ const days = [
 ];
 
 export default function Application(props) {
+  //set the default day to Monday - adding state to Application.js
+  //line 39 passes day and days to DayList
   const [day, setDay] = useState("Monday");
 
   return (

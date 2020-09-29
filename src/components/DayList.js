@@ -2,6 +2,7 @@ import React from "react";
 
 import DayListItem from "components/DayListItem";
 
+//props.setDay recieves the value represented by the state
 export default function DayList(props) {
   const days = props.days.map((day) => {
     return (
@@ -10,7 +11,7 @@ export default function DayList(props) {
         name={day.name}
         spots={day.spots}
         selected={day.name === props.day}
-        setDay={day => console.log(day)}
+        setDay={props.setDay}
       />
     );
   });
