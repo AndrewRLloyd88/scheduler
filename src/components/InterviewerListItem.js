@@ -15,8 +15,6 @@ export default function InterviewerListItem(props) {
   //insert useState h, {useState}ere
 
   return (
-    <section className="interviewers">
-      <h3 className="interviewers__header text--light">Interviewer</h3>
       <li className={interviewerClass} onClick={() => props.setInterviewer}>
         <img
           className="interviewers__item-image"
@@ -25,6 +23,5 @@ export default function InterviewerListItem(props) {
         />
         {props.selected && props.name}
       </li>
-    </section>
   );
 }
