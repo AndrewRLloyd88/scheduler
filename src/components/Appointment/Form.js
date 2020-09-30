@@ -10,7 +10,8 @@ export default function Form(props) {
       <section className="appointment__card-left">
         <form autoComplete="off">
           <input
-            value={props.name}
+            value={name}
+            onChange={(event) => setName(event.target.value)}
             className="appointment__create-input text--semi-bold"
             name="name"
             type="text"
