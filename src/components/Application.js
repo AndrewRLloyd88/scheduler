@@ -1,28 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import "components/Application.scss";
 import "components/Appointment";
 import Appointment from "components/Appointment";
+import axios from "axios";
 
 import DayList from "components/DayList";
-
-const days = [
-  {
-    id: 1,
-    name: "Monday",
-    spots: 2,
-  },
-  {
-    id: 2,
-    name: "Tuesday",
-    spots: 5,
-  },
-  {
-    id: 3,
-    name: "Wednesday",
-    spots: 0,
-  },
-];
 
 //appointments fake data
 const appointments = [
@@ -76,6 +59,13 @@ export default function Application(props) {
   //set the default day to Monday - adding state to Application.js
   //line 39 passes day and days to DayList
   const [day, setDay] = useState("Monday");
+  const [days, setDays] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8001/api/days").then((response) => {
+      setDays([...response.data]);
+    });
+  }, []);
 
   const appointmentList = appointments.map((appointment) => {
     return <Appointment key={appointment.id} {...appointment} />;
