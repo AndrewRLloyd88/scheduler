@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getAppointmentsForDay } from "helpers/selectors.js";
+import { getAppointmentsForDay, getInterview } from "helpers/selectors.js";
 
 import "components/Application.scss";
 import "components/Appointment";
@@ -19,11 +19,26 @@ export default function Application(props) {
     interviewers: {},
   });
 
-  const appointmentList = getAppointmentsForDay(state, state.day).map(
-    (appointment) => {
-      return <Appointment key={appointment.id} {...appointment} />;
-    }
-  );
+  //making changes based on compass code here working code is:
+  // const appointmentList = getAppointmentsForDay(state, state.day).map(
+  //   (appointment) => {
+  //     return <Appointment key={appointment.id} {...appointment} />;
+  //   }
+  // );
+
+  const appointmentList = getAppointmentsForDay(state, state.day);
+
+  const schedule = appointmentList.map((appointment) => {
+    const interview = getInterview(state, appointment.interview);
+
+    return (
+      <Appointment
+        key={appointment.id}
+        {...appointment}
+        interview={interview}
+      />
+    );
+  });
 
   const setDay = (day) => setState({ ...state, day });
   const setDays = (days) => setState((prev) => ({ ...prev, days }));
@@ -69,7 +84,7 @@ export default function Application(props) {
       </section>
 
       <section className="schedule">
-        {appointmentList}
+        {schedule}
         <Appointment key="last" time="5pm" />
       </section>
     </main>

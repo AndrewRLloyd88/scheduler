@@ -50,3 +50,5 @@ export function getAppointmentsForDay(state, day) {
 
   return appointmentObject;
 }
+
+export function getInterview(state, day) {}
