@@ -34,14 +34,14 @@ export default function Application(props) {
     return (
       <Appointment
         key={appointment.id}
-        {...appointment}
+        id={appointment.id}
+        time={appointment.time}
         interview={interview}
       />
     );
   });
 
   const setDay = (day) => setState({ ...state, day });
-  const setDays = (days) => setState((prev) => ({ ...prev, days }));
 
   useEffect(() => {
     const dayPromise = axios.get("http://localhost:8001/api/days");
@@ -61,9 +61,10 @@ export default function Application(props) {
         interviewers: responseArr[2].data,
       }));
       //testing our interviewers route is retireving data ok
-      console.log(responseArr[2].data);
+      // console.log(responseArr[2].data);
     });
   }, []);
+
   return (
     <main className="layout">
       <section className="sidebar">
