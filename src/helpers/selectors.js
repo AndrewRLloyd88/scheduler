@@ -65,10 +65,11 @@ export function getAppointmentsForDay(state, day) {
 
 //
 export function getInterview(state, interview) {
+  //if there is no interview booked return null
   if (!interview) {
     return null;
   }
-
+  //return an object and build it with the student and interviewer in
   const interviewObject = {};
   interviewObject.student = interview.student;
   interviewObject.interviewer = state.interviewers[interview.interviewer];
