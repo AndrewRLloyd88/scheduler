@@ -9,7 +9,12 @@ export default function useVisualMode(initialmode) {
   const [history, setHistory] = useState([initialmode]);
 
   //adding the transitition function that will take in a new mode
-  const transition = (newmode) => {
+  const transition = (newmode, replace = false) => {
+    // When replace is true then set the history to reflect that we are replacing the current mode.
+    if (replace) {
+      //remove the last index item as part of replacing the curent mode
+      history.pop();
+    }
     //update the mode state to the newmode value
     setMode(newmode);
     // When transition is called, we need to add the new mode to our history.
