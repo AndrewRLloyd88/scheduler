@@ -43,6 +43,7 @@
 
 // returns an array of appointments for the given day.
 export function getAppointmentsForDay(state, day) {
+  //this needs to be re-written to a less confusing loop in loop scenario
   //store our appointments to return
   const appointmentObject = [];
   //defining appointment days as state.days
@@ -76,3 +77,19 @@ export function getInterview(state, interview) {
 
   return interviewObject;
 }
+
+export const getInterviewersForDay = function (state, day) {
+  //re-write this entire section using find()
+  const interviewerDay = state.days.find((weekday) => weekday.name === day);
+  //check to see if there are no interviewers needed or the day is undefined then return an emtpty array
+  if (state.days.length === 0 || interviewerDay === undefined) {
+    return [];
+  }
+  //we then need to look through all the interviewers and map over it
+  const interviewers = interviewerDay.interviewers.map(
+    //grab the interviewers id and map it into the array
+    (id) => state.interviewers[id]
+  );
+  //now we must return our interviewers
+  return interviewers;
+};
