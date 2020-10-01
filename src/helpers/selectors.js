@@ -53,7 +53,7 @@ export function getAppointmentsForDay(state, day) {
   for (const appointmentDay of appointmentDays) {
     //if the day matches the day name
     if (appointmentDay.name === day) {
-      console.log(appointmentDay);
+      // console.log(appointmentDay);
       //loop through the appointments array
       for (const elem of appointmentDay.appointments) {
         appointmentObject.push(appointments[elem]);
