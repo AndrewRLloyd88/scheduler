@@ -33,17 +33,22 @@ export default function Application(props) {
     const promiseAppointments = axios.get(
       "http://localhost:8001/api/appointments"
     );
-    const promises = [dayPromise, promiseAppointments];
+    const promiseInterviewers = axios.get(
+      "http://localhost:8001/api/interviewers"
+    );
+    const promises = [dayPromise, promiseAppointments, promiseInterviewers];
 
     Promise.all(promises).then((responseArr) => {
       setState((prev) => ({
         ...prev,
         days: responseArr[0].data,
         appointments: responseArr[1].data,
+        interviewers: responseArr[2].data,
       }));
+      //testing our interviewers route is retireving data ok
+      console.log(responseArr[2].data);
     });
   }, []);
-
   return (
     <main className="layout">
       <section className="sidebar">
