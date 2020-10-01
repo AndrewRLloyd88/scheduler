@@ -16,6 +16,7 @@ export default function Application(props) {
     days: [],
     // you may put the line below, but will have to remove/comment hardcoded appointments variable
     appointments: {},
+    interviewers: {},
   });
 
   const appointmentList = getAppointmentsForDay(state, state.day).map(
