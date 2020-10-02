@@ -23,12 +23,10 @@ export default function Application(props) {
     interviewers: {},
   });
 
-  //making changes based on compass code here working code is:
-  // const appointmentList = getAppointmentsForDay(state, state.day).map(
-  //   (appointment) => {
-  //     return <Appointment key={appointment.id} {...appointment} />;
-  //   }
-  // );
+  //create a function called bookInterview
+  const bookInterview = (id, interview) => {
+    console.log(id, interview);
+  };
 
   const appointmentList = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
@@ -43,6 +41,7 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         interviewers={interviewers}
+        bookInterview={bookInterview}
       />
     );
   });
@@ -70,11 +69,6 @@ export default function Application(props) {
       // console.log(responseArr[2].data);
     });
   }, []);
-
-  //create a function called bookInterview
-  const bookInterview = (id, interview) => {
-    console.log(id, interview);
-  };
 
   return (
     <main className="layout">
