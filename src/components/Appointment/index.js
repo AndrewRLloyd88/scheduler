@@ -5,10 +5,12 @@ import Empty from "components/Appointment/Empty";
 import Form from "components/Appointment/Form";
 import useVisualMode from "hooks/useVisualMode";
 import "components/Appointment/styles.scss";
+import Status from "./Status";
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
+const SAVE = "SAVE";
 
 //building our appointment component
 export default function Appointment(props) {
@@ -23,6 +25,10 @@ export default function Appointment(props) {
       student: name,
       interviewer,
     };
+    transition(SAVE);
+    props.bookInterview(props.id, interview).then(function () {
+      transition(SHOW);
+    });
   }
 
   return (
@@ -42,6 +48,7 @@ export default function Appointment(props) {
           onSave={save}
         />
       )}
+      {mode === SAVE && <Status message={SAVE} />}
     </article>
   );
 }

@@ -18,7 +18,7 @@ export default function Form(props) {
   };
 
   const save = () => {
-    props.onSave();
+    props.onSave(name, interviewer);
   };
 
   return (
@@ -48,7 +48,12 @@ export default function Form(props) {
           <Button danger onClick={() => cancel()}>
             Cancel
           </Button>
-          <Button confirm onClick={() => save()}>
+          <Button
+            confirm
+            onClick={() => {
+              save();
+            }}
+          >
             Save
           </Button>
         </section>
