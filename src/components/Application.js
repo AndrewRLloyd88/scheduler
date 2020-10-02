@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { getAppointmentsForDay, getInterview } from "helpers/selectors.js";
+import {
+  getAppointmentsForDay,
+  getInterview,
+  getInterviewersForDay,
+} from "../helpers/selectors.js";
 
 import "components/Application.scss";
 import "components/Appointment";
@@ -27,6 +31,7 @@ export default function Application(props) {
   // );
 
   const appointmentList = getAppointmentsForDay(state, state.day);
+  const interviewers = getInterviewersForDay(state, state.day);
 
   const schedule = appointmentList.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
@@ -37,6 +42,7 @@ export default function Application(props) {
         id={appointment.id}
         time={appointment.time}
         interview={interview}
+        interviewers={interviewers}
       />
     );
   });
