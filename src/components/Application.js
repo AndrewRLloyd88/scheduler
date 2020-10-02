@@ -47,7 +47,6 @@ export default function Application(props) {
 
   // creating the main cancelInterview function in Application.js,
   const deleteInterview = (id) => {
-    console.log(id);
     const appointment = {
       ...state.appointments[id],
       interview: null,
