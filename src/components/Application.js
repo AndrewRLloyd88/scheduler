@@ -71,6 +71,11 @@ export default function Application(props) {
     });
   }, []);
 
+  //create a function called bookInterview
+  const bookInterview = (id, interview) => {
+    console.log(id, interview);
+  };
+
   return (
     <main className="layout">
       <section className="sidebar">
