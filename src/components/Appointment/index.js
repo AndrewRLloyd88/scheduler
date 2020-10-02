@@ -8,12 +8,14 @@ import "components/Appointment/styles.scss";
 import Status from "./Status";
 import Confirm from "./Confirm";
 
+//all of our states the app is in
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVING = "SAVING";
 const DELETING = "DELETING";
 const CONFIRM = "CONFIRM";
+const EDIT = "EDIT";
 
 //building our appointment component
 export default function Appointment(props) {
@@ -34,17 +36,6 @@ export default function Appointment(props) {
     });
   }
 
-  // function delete(name, interviewer) {
-  //   const interview = {
-  //     student: name,
-  //     interviewer,
-  //   };
-  //   transition(DELETING);
-  //   props.deleteInterview(props.id, interview).then(function () {
-  //     transition(EMPTY);
-  //   });
-  // }
-
   return (
     <article className="appointment">
       <Header time={props.time} />
@@ -54,6 +45,7 @@ export default function Appointment(props) {
           student={props.interview.student}
           interviewer={props.interview.interviewer}
           onDelete={() => transition(CONFIRM)}
+          onEdit={() => transition(EDIT)}
         />
       )}
       {mode === CREATE && (
