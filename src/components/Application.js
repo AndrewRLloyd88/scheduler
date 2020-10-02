@@ -45,6 +45,28 @@ export default function Application(props) {
       });
   };
 
+  // creating the main cancelInterview function in Application.js,
+  const deleteInterview = (id) => {
+    console.log(id);
+    const appointment = {
+      ...state.appointments[id],
+      interview: null,
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+    return axios
+      .delete(`http://localhost:8001/api/appointments/${id}`, appointment)
+      .then(() => {
+        setState({
+          ...state,
+          appointments,
+        });
+      });
+  };
+
   const appointmentList = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
 
