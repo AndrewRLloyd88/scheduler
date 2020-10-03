@@ -9,7 +9,7 @@ import Status from "./Status";
 import Confirm from "./Confirm";
 import Error from "./Error";
 
-//all of our states the app is in
+//Working states of our app
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
@@ -22,13 +22,11 @@ const EDIT = "EDIT";
 const ERROR_DELETING = "ERROR_DELETING";
 const ERROR_SAVING = "ERROR_SAVING";
 
-//building our appointment component
+//building our appointment component and state logic associated
 export default function Appointment(props) {
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
-
-  // Call the props.bookInterview function with the appointment id and interview as arguments from within the save function. Verify that the correct id and interview values are correct in the console output.
 
   function save(name, interviewer) {
     const interview = {

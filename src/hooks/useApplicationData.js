@@ -7,14 +7,21 @@ export const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
 export const SET_INTERVIEW = "SET_INTERVIEW";
 
 export default function useApplicationData() {
+  //using reducer to control state, throws error when the action.type is unsupported by the reducer
+  //worked through this session with a mentor to better understand the constructon for the switch
   const reducer = (state, action) => {
     switch (action.type) {
+      //change the day logic
       case SET_DAY:
         return { ...state, day: action.day };
+      //update Application Data
       case SET_APPLICATION_DATA: {
+        //pulling out each action
         const { appointments, days, interviewers } = action;
+        //gives us back the appropriate state, days, appointments and interviewers
         return { ...state, days, appointments, interviewers };
       }
+      //Book an interview
       case SET_INTERVIEW: {
         const { id, interview, dayName } = action;
         const appointment = {
@@ -26,16 +33,19 @@ export default function useApplicationData() {
           ...state.appointments,
           [id]: appointment,
         };
-
+        //need a variable to hold our mapped over days
         const newDays = state.days.map((day) => {
+          //check if the selected day matches a day name
           if (day.name === dayName) {
+            //depending on the action taking remove or add a spot
             return { ...day, spots: interview ? day.spots - 1 : day.spots + 1 };
           }
           return day;
         });
-
+        //return our appointments object our days array and our interviewers object including spots
         return { ...state, appointments, days: newDays };
       }
+      //error handling as a default if for any reason the app jumps to an illegal action type
       default:
         throw new Error(
           `Reduce Error, Attempted to reduce with illegal action type: ${action.type}`
@@ -101,5 +111,6 @@ export default function useApplicationData() {
         });
       });
   };
+  //pass this data across for use in our components/Application.js (The client side)
   return { state, setDay, bookInterview, deleteInterview };
 }
