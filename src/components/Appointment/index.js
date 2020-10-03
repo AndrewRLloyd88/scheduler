@@ -73,7 +73,7 @@ export default function Appointment(props) {
           onConfirm={() => {
             transition(DELETING, true);
             props
-              .deleteInterview(props.id)
+              .deleteInterview(props.id, props.day)
               .then(() => transition(EMPTY))
               .catch(() => {
                 transition(ERROR_DELETING, true);
@@ -90,7 +90,7 @@ export default function Appointment(props) {
           onSave={(name, interviewer) => {
             transition(SAVING);
             props
-              .bookInterview(props.id, save(name, interviewer))
+              .bookInterview(props.id, props.day, save(name, interviewer))
               .then(() => transition(SHOW))
               .catch(() => {
                 transition(ERROR_SAVING, true);
