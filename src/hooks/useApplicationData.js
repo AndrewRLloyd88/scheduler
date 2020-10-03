@@ -115,13 +115,13 @@ export default function useApplicationData() {
   };
 
   webSocket.onopen = function (event) {
-    webSocket.send("Ping");
+    webSocket.send("Ping Ping");
   };
 
-  // webSocket.onmessage = function (event) {
-  //   const { type, id, interview } = JSON.parse(event.data);
-  //   dispatch({ type, id, interview });
-  // };
+  webSocket.onmessage = function (event) {
+    const { type, id, interview } = JSON.parse(event.data);
+    dispatch({ type, id, interview });
+  };
 
   //pass this data across for use in our components/Application.js (The client side)
   return { state, setDay, bookInterview, deleteInterview };
