@@ -1,12 +1,5 @@
 import { useEffect, useReducer } from "react";
 
-// import {
-//   reducer,
-//   SET_APPLICATION_DATA,
-//   SET_DAY,
-//   SET_INTERVIEW,
-// } from "../reducers/application";
-
 import axios from "axios";
 
 export const SET_DAY = "SET_DAY";
@@ -82,7 +75,7 @@ export default function useApplicationData() {
 
   // sends the create appointmnet request data to our API via side effect of axios
   const bookInterview = (id, interview, dayName) => {
-    console.log(id, interview);
+    console.log(id, interview, dayName);
     return axios
       .put(`http://localhost:8001/api/appointments/${id}`, { interview })
       .then(() => {

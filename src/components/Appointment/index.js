@@ -35,15 +35,7 @@ export default function Appointment(props) {
       student: name,
       interviewer,
     };
-    transition(SAVING);
-    props
-      .bookInterview(props.id, interview)
-      .then(function () {
-        transition(SHOW);
-      })
-      .catch(() => {
-        transition(ERROR_SAVING, true);
-      });
+    return interview;
   }
 
   return (
@@ -62,7 +54,17 @@ export default function Appointment(props) {
         <Form
           interviewers={props.interviewers}
           onCancel={() => back()}
-          onSave={save}
+          onSave={(name, interviewer) => {
+            transition(SAVING);
+            props
+              .bookInterview(props.id, save(name, interviewer), props.day)
+              .then(() => {
+                transition(SHOW);
+              })
+              .catch(() => {
+                transition(ERROR_SAVING, true);
+              });
+          }}
         />
       )}
       {mode === SAVING && <Status message={SAVING} />}
