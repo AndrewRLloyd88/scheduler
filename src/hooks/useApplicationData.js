@@ -2,6 +2,8 @@ import { useEffect, useReducer } from "react";
 
 import axios from "axios";
 
+const webSocket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
+
 export const SET_DAY = "SET_DAY";
 export const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
 export const SET_INTERVIEW = "SET_INTERVIEW";
@@ -111,6 +113,12 @@ export default function useApplicationData() {
         });
       });
   };
+
+  webSocket.onmessage = function (event) {
+    const { type, id, interview } = JSON.parse(event.data);
+    dispatch({ type, id, interview });
+  };
+
   //pass this data across for use in our components/Application.js (The client side)
   return { state, setDay, bookInterview, deleteInterview };
 }
