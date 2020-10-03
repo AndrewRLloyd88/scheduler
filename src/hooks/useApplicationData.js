@@ -75,6 +75,13 @@ export default function useApplicationData() {
     );
     const promises = [dayPromise, promiseAppointments, promiseInterviewers];
 
+    webSocket.onmessage = function (event) {
+      const { id, interview } = JSON.parse(event.data);
+      console.log(interview);
+      dispatch({ type: SET_INTERVIEW, id, interview });
+      console.log("Message Recieved: ", event.data);
+    };
+
     Promise.all(promises).then((responseArr) =>
       dispatch({
         type: SET_APPLICATION_DATA,
@@ -83,6 +90,7 @@ export default function useApplicationData() {
         interviewers: responseArr[2].data,
       })
     );
+    return () => webSocket.close();
   }, []);
 
   // sends the create appointmnet request data to our API via side effect of axios
@@ -112,15 +120,6 @@ export default function useApplicationData() {
           interview: null,
         });
       });
-  };
-
-  webSocket.onopen = function (event) {
-    webSocket.send("Ping Ping");
-  };
-
-  webSocket.onmessage = function (event) {
-    const { type, id, interview } = JSON.parse(event.data);
-    dispatch({ type, id, interview });
   };
 
   //pass this data across for use in our components/Application.js (The client side)

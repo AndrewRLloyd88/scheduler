@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "components/Appointment/Header";
 import Show from "components/Appointment/Show";
 import Empty from "components/Appointment/Empty";
@@ -33,14 +33,31 @@ export default function Appointment(props) {
       student: name,
       interviewer,
     };
-    return interview;
+    transition(SAVING);
+    props
+      .bookInterview(props.id, interview, props.day)
+      .then(() => {
+        transition(SHOW);
+      })
+      .catch(() => {
+        transition(ERROR_SAVING, true);
+      });
   }
+
+  useEffect(() => {
+    if (props.interview && mode === EMPTY) {
+      transition(SHOW);
+    }
+    if (!props.interview && mode === SHOW) {
+      transition(EMPTY);
+    }
+  }, [props.interview, transition, mode]);
 
   return (
     <article className="appointment">
       <Header time={props.time} />
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
-      {mode === SHOW && (
+      {mode === SHOW && props.interview && (
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
@@ -52,17 +69,7 @@ export default function Appointment(props) {
         <Form
           interviewers={props.interviewers}
           onCancel={() => back()}
-          onSave={(name, interviewer) => {
-            transition(SAVING);
-            props
-              .bookInterview(props.id, save(name, interviewer), props.day)
-              .then(() => {
-                transition(SHOW);
-              })
-              .catch(() => {
-                transition(ERROR_SAVING, true);
-              });
-          }}
+          onSave={save}
         />
       )}
       {mode === SAVING && <Status message={SAVING} />}
