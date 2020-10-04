@@ -1,9 +1,15 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import InterviewerListItem from "components/InterviewerListItem";
 
 //import the styles
 import "components/InterviewerList.scss";
+
+InterviewerList.propTypes = {
+  value: PropTypes.number,
+  onChange: PropTypes.func.isRequired,
+};
 
 ////props.setInterviewer recieves the value represented by the state
 export default function InterviewerList(props) {
