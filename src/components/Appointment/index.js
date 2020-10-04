@@ -24,7 +24,6 @@ const ERROR_SAVING = "ERROR_SAVING";
 
 //building our appointment component and state logic associated
 export default function Appointment(props) {
-  console.log(props);
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );

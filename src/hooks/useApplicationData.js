@@ -82,9 +82,9 @@ export default function useApplicationData() {
 
     webSocket.onmessage = function (event) {
       const { id, interview } = JSON.parse(event.data);
-      console.log(interview);
+      // console.log(interview);
       dispatch({ type: SET_INTERVIEW, id, interview });
-      console.log("Message Recieved: ", event.data);
+      // console.log("Message Recieved: ", event.data);
     };
 
     Promise.all(promises).then((responseArr) =>
@@ -100,7 +100,7 @@ export default function useApplicationData() {
 
   // sends the create appointmnet request data to our API via side effect of axios
   const bookInterview = (id, interview, dayName) => {
-    console.log(id, interview, dayName);
+    // console.log(id, interview, dayName);
     return (
       axios
         //TODO: get away from hard coded URL use ENV Variables especially for live deploy
