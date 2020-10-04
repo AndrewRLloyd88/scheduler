@@ -25,7 +25,8 @@ export default function useApplicationData() {
       }
       //Book an interview
       case SET_INTERVIEW: {
-        const { id, interview, dayName } = action;
+        //do not want data update on edit
+        const { id, interview } = action;
         const appointment = {
           ...state.appointments[id],
           interview: interview && { ...interview },
@@ -35,10 +36,14 @@ export default function useApplicationData() {
           ...state.appointments,
           [id]: appointment,
         };
+        //returns day obj or null
+        const appointmentDay = state.days.find((day) =>
+          day.appointments.includes(id)
+        );
         //need a variable to hold our mapped over days
         const newDays = state.days.map((day) => {
           //check if the selected day matches a day name
-          if (day.name === dayName) {
+          if (day.name === appointmentDay.name) {
             //depending on the action taking remove or add a spot
             return { ...day, spots: interview ? day.spots - 1 : day.spots + 1 };
           }
@@ -96,16 +101,18 @@ export default function useApplicationData() {
   // sends the create appointmnet request data to our API via side effect of axios
   const bookInterview = (id, interview, dayName) => {
     console.log(id, interview, dayName);
-    return axios
-      .put(`http://localhost:8001/api/appointments/${id}`, { interview })
-      .then(() => {
-        dispatch({
-          type: SET_INTERVIEW,
-          id,
-          dayName,
-          interview,
-        });
-      });
+    return (
+      axios
+        //TODO: get away from hard coded URL use ENV Variables especially for live deploy
+        .put(`http://localhost:8001/api/appointments/${id}`, { interview })
+        .then(() => {
+          dispatch({
+            type: SET_INTERVIEW,
+            id,
+            interview,
+          });
+        })
+    );
   };
 
   // sends the delete appointment request data to our API via side effect of axios

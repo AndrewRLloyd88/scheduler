@@ -13,6 +13,7 @@ import {
   getAppointmentsForDay,
   getInterview,
   getInterviewersForDay,
+  getSpotsForDay,
 } from "../helpers/selectors";
 
 export default function Application(props) {
@@ -37,7 +38,6 @@ export default function Application(props) {
         key={appointment.id}
         id={appointment.id}
         time={appointment.time}
-        day={state.day}
         interview={interview}
         interviewers={interviewers}
         bookInterview={bookInterview}
@@ -57,7 +57,13 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList days={state.days} day={state.day} setDay={setDay} />
+          <DayList
+            days={state.days}
+            day={state.day}
+            setDay={setDay}
+            appointments={state.appointments}
+            getSpotsForDay={getSpotsForDay}
+          />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"

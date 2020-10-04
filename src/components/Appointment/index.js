@@ -24,6 +24,7 @@ const ERROR_SAVING = "ERROR_SAVING";
 
 //building our appointment component and state logic associated
 export default function Appointment(props) {
+  console.log(props);
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
@@ -35,7 +36,7 @@ export default function Appointment(props) {
     };
     transition(SAVING);
     props
-      .bookInterview(props.id, interview, props.day)
+      .bookInterview(props.id, interview)
       .then(() => {
         transition(SHOW);
       })
@@ -80,7 +81,7 @@ export default function Appointment(props) {
           onConfirm={() => {
             transition(DELETING, true);
             props
-              .deleteInterview(props.id, props.day)
+              .deleteInterview(props.id)
               .then(() => transition(EMPTY))
               .catch(() => {
                 transition(ERROR_DELETING, true);
@@ -94,15 +95,7 @@ export default function Appointment(props) {
           name={props.interview.student}
           interviewer={props.interview.interviewer.id}
           interviewers={props.interviewers}
-          onSave={(name, interviewer) => {
-            transition(SAVING);
-            props
-              .bookInterview(props.id, props.day, save(name, interviewer))
-              .then(() => transition(SHOW))
-              .catch(() => {
-                transition(ERROR_SAVING, true);
-              });
-          }}
+          onSave={save}
           onCancel={() => transition(SHOW)}
         />
       )}

@@ -93,3 +93,23 @@ export const getInterviewersForDay = function (state, day) {
   //now we must return our interviewers
   return interviewers;
 };
+
+// get spots for appointmnets per day
+export const getSpotsForDay = (appointments, days, day) => {
+  const targetDay = days.find((e) => e.name === day);
+  const appointmentList = [...targetDay.appointments];
+  const appointmentsSpread = { ...appointments };
+
+  const number = Object.values(appointmentsSpread).reduce(
+    (total, appointment) => {
+      if (appointmentList.includes(appointment.id)) {
+        if (appointment.interview) {
+          return total + 1;
+        }
+      }
+      return total;
+    },
+    0
+  );
+  return 5 - number;
+};
