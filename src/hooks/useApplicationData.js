@@ -71,13 +71,9 @@ export default function useApplicationData() {
 
   //sends the payload to axios containing days appointtments and interviewers
   useEffect(() => {
-    const dayPromise = axios.get("http://localhost:8001/api/days");
-    const promiseAppointments = axios.get(
-      "http://localhost:8001/api/appointments"
-    );
-    const promiseInterviewers = axios.get(
-      "http://localhost:8001/api/interviewers"
-    );
+    const dayPromise = axios.get("/api/days");
+    const promiseAppointments = axios.get("/api/appointments");
+    const promiseInterviewers = axios.get("/api/interviewers");
     const promises = [dayPromise, promiseAppointments, promiseInterviewers];
 
     webSocket.onmessage = function (event) {
@@ -104,7 +100,7 @@ export default function useApplicationData() {
     return (
       axios
         //TODO: get away from hard coded URL use ENV Variables especially for live deploy
-        .put(`http://localhost:8001/api/appointments/${id}`, { interview })
+        .put(`/api/appointments/${id}`, { interview })
         .then(() => {
           dispatch({
             type: SET_INTERVIEW,
@@ -117,16 +113,14 @@ export default function useApplicationData() {
 
   // sends the delete appointment request data to our API via side effect of axios
   const deleteInterview = (id, dayName) => {
-    return axios
-      .delete(`http://localhost:8001/api/appointments/${id}`)
-      .then(() => {
-        dispatch({
-          type: SET_INTERVIEW,
-          id,
-          dayName,
-          interview: null,
-        });
+    return axios.delete(`api/appointments/${id}`).then(() => {
+      dispatch({
+        type: SET_INTERVIEW,
+        id,
+        dayName,
+        interview: null,
       });
+    });
   };
 
   //pass this data across for use in our components/Application.js (The client side)
