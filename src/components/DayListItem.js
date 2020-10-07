@@ -13,7 +13,7 @@ export default function DayListItem(props) {
   });
 
   return (
-    <li className={liClass} onClick={() => setDay(name)}>
+    <li data-testid="day" className={liClass} onClick={() => setDay(name)}>
       <h2>{name}</h2>
       <h3>
         {(spots ? (spots === 1 ? "1 spot " : spots + " spots ") : "no spots ") +
