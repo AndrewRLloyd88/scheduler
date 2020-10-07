@@ -17,7 +17,7 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      - run: yarn test
+      - run: REACT_APP_WEBSOCKET_URL=ws://localhost:8001 yarn test
 
 workflows:
   version: 2
