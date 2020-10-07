@@ -15,7 +15,7 @@ import {
 
 import Application from "components/Application";
 import axios from "axios";
-
+process.env.REACT_APP_WEBSOCKET_URL = "ws://localhost:8001";
 afterEach(cleanup);
 
 describe("Application", () => {
