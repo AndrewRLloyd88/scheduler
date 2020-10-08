@@ -1,6 +1,7 @@
 {
   "name": "scheduler",
   "version": "0.1.0",
+  "proxy": "http://localhost:8001",
   "dependencies": {
     "@testing-library/react-hooks": "^3.4.2",
     "axios": "^0.20.0",
