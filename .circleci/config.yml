@@ -20,8 +20,8 @@ jobs:
       - run: REACT_APP_WEBSOCKET_URL=ws://localhost:8001 yarn test
 
       deploy:
-  machine:
-    enabled: true
+        machine:
+          enabled: true
 
   working_directory: ~/client
 
