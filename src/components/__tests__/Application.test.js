@@ -8,7 +8,6 @@ import {
   getByAltText,
   getByText,
   getAllByTestId,
-  prettyDOM,
   getByPlaceholderText,
   queryByText,
 } from "@testing-library/react";
@@ -149,7 +148,7 @@ describe("Application", () => {
   it("shows the delete error when failing to delete an existing appointment", async () => {
     axios.put.mockRejectedValueOnce();
 
-    const { container, debug } = render(<Application />);
+    const { container } = render(<Application />);
     await waitForElement(() => getByText(container, "Archie Cohen"));
 
     const appointment = getAllByTestId(
