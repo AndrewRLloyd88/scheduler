@@ -2,7 +2,7 @@
 
 ## Netlify Deploy Link
 
-[https://andrew-lloyd-scheduler.netlify.app/](https://trusting-swartz-0eb30c.netlify.app/)
+[https://andrew-lloyd-scheduler.netlify.app/](https://andrew-lloyd-scheduler.netlify.app/)
 
 ## Scheduler in Action
 
